@@ -4,12 +4,15 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gojek/heimdall/v7"
 	"github.com/gojek/heimdall/v7/httpclient"
 	"github.com/gojek/heimdall/v7/hystrix"
+	"github.com/gojek/heimdall/v7/plugins"
 	"github.com/pkg/errors"
+	"github.com/rs/zerolog"
 )
 
 const (
@@ -143,4 +146,27 @@ func customHystrixClientUsage() error {
 
 	fmt.Printf("Response: %s", string(respBody))
 	return nil
+}
+
+const TIME_FORMAT = "2006-01-02T15:04:05.000000"
+
+func pluginZerolog() {
+	logLevel := zerolog.InfoLevel
+	zerolog.SetGlobalLevel(logLevel)
+
+	zerolog.TimeFieldFormat = TIME_FORMAT
+	// change applog into stdout
+	config := zerolog.New(os.Stdout).With().Timestamp().Logger()
+
+	client := httpclient.NewClient()
+	requestLogger := plugins.NewZerologLogger(config)
+	client.AddPlugin(requestLogger)
+	// use the client as before
+
+	req, _ := http.NewRequest(http.MethodGet, "http://google.com", nil)
+	res, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Response: ", res)
 }

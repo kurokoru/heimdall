@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"fmt"
@@ -168,5 +168,5 @@ func pluginZerolog() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("response", res)
+	fmt.Printf("Response: ", res)
 }

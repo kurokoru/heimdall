@@ -7,10 +7,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/gojek/heimdall/v7"
-	"github.com/gojek/heimdall/v7/httpclient"
-	"github.com/gojek/heimdall/v7/hystrix"
-	"github.com/gojek/heimdall/v7/plugins"
+	"github.com/kurokoru/heimdall/v7"
+	"github.com/kurokoru/heimdall/v7/httpclient"
+	"github.com/kurokoru/heimdall/v7/hystrix"
+	"github.com/kurokoru/heimdall/v7/plugins"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 )

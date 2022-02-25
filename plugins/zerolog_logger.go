@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gojek/heimdall/v7"
+	"github.com/kurokoru/heimdall/v7"
 	"github.com/rs/zerolog"
 )
 
